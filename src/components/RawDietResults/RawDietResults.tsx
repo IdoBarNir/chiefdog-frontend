@@ -31,8 +31,10 @@ const RawDietResults: FC<RawDietResultsProps> = ({ input }) => {
   return (
     <div
       style={{
-        width: "100%",
-        overflowX: "scroll",
+        maxWidth: "100%",
+        maxHeight: "100vh",
+        overflowX: "auto",
+        overflowY: "auto",
         whiteSpace: "nowrap",
       }}
     >
@@ -41,6 +43,7 @@ const RawDietResults: FC<RawDietResultsProps> = ({ input }) => {
           display: "flex",
           flexDirection: "row",
           gap: "20px",
+          flexWrap: "wrap",
         }}
       >
         {Object.keys(recipes).map((meal) => (
