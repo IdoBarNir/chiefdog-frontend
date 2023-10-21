@@ -31,18 +31,23 @@ const RawDietResults: FC<RawDietResultsProps> = ({ input }) => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "row",
-        gap: "20px",
-        overflowX: "auto",
-        flexWrap: "nowrap",
-        paddingBottom: "20px",
+        width: "100%",
+        overflowX: "scroll",
+        whiteSpace: "nowrap",
       }}
     >
-      {Object.keys(recipes).map((meal) => (
-        <MealCard key={meal} meal={meal} ingredients={recipes[meal]} />
-      ))}
-      <ShoppingCard data={shoppingList} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: "20px",
+        }}
+      >
+        {Object.keys(recipes).map((meal) => (
+          <MealCard key={meal} meal={meal} ingredients={recipes[meal]} />
+        ))}
+        <ShoppingCard data={shoppingList} />
+      </div>
     </div>
   );
 };
