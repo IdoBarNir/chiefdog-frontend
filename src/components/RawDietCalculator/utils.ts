@@ -1,4 +1,4 @@
-import { Ingredient } from "../../types/rawDietCalculator";
+import { Ingredient } from "@components/types";
 
 export const isNumeric = /^\d*\.?\d*$/;
 
@@ -33,7 +33,7 @@ export const recipeConfig: {
 export const getRecipes = ({ amountPerMeal }: { amountPerMeal: number }) => {
   const recipes: { [key: string]: Ingredient } = {};
 
-  for (const meal in recipeConfig) {
+  Object.keys(recipeConfig).forEach((meal) => {
     const ingredientsResult: Ingredient = {};
 
     for (const ingredient in recipeConfig[meal]) {
@@ -42,7 +42,7 @@ export const getRecipes = ({ amountPerMeal }: { amountPerMeal: number }) => {
     }
 
     recipes[meal] = ingredientsResult;
-  }
+  });
 
   return recipes;
 };
@@ -51,16 +51,26 @@ export const getShoppingList = ({
   recipes,
   multiplier,
 }: {
-  recipes: {
-    [key: string]: Ingredient;
-  };
+  recipes: { [key: string]: Ingredient };
   multiplier: number;
 }): Ingredient => {
   const shoppingList: Ingredient = {};
 
+  if (!isFinite(multiplier) || multiplier <= 0) {
+    console.error("Invalid or non-positive multiplier.");
+    return shoppingList;
+  }
+
   for (const meal in recipes) {
     for (const ingredient in recipes[meal]) {
       const totalAmountForTimeFrame = recipes[meal][ingredient] * multiplier;
+
+      if (!isFinite(totalAmountForTimeFrame)) {
+        console.error(
+          `Invalid amount for ingredient '${ingredient}' in meal '${meal}'`
+        );
+        continue;
+      }
 
       if (shoppingList[ingredient]) {
         shoppingList[ingredient] += totalAmountForTimeFrame;

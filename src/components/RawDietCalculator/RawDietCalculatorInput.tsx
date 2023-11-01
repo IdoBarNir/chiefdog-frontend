@@ -10,14 +10,16 @@ import {
   TextField,
 } from "@mui/material";
 
-import { isNumeric } from "./utils";
-import { CalculatorInput, TimeFrame } from "../../types/rawDietCalculator";
+import { isNumeric } from "@components/utils";
+import { CalculatorInput, TimeFrame } from "@components/types";
 
-type RawDietCalculatorProps = {
+type RawDietCalculatorInputProps = {
   setInput: Dispatch<SetStateAction<CalculatorInput>>;
 };
 
-const RawDietCalculator: FC<RawDietCalculatorProps> = ({ setInput }) => {
+const RawDietCalculatorInput: FC<RawDietCalculatorInputProps> = ({
+  setInput,
+}) => {
   const [weight, setWeight] = useState("");
   const [dailyWeightPercentage, setDailyWeightPercentage] = useState("");
   const [timeUnit, setTimeUnit] = useState("");
@@ -54,10 +56,8 @@ const RawDietCalculator: FC<RawDietCalculatorProps> = ({ setInput }) => {
     setTimeFrame(newTimeFrame as TimeFrame);
   };
 
-  console.log({ weight, timeUnit, timeFrame, dailyWeightPercentage });
-
   return (
-    <Box>
+    <Box className="rawDietCalculatorInput">
       <TextField
         type="text"
         value={weight}
@@ -103,4 +103,4 @@ const RawDietCalculator: FC<RawDietCalculatorProps> = ({ setInput }) => {
   );
 };
 
-export default RawDietCalculator;
+export default RawDietCalculatorInput;

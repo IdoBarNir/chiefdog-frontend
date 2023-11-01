@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import ResultCard from "./ResultCard";
+import { ResultCard } from "@components/index";
 
 type MealCardProps = {
   meal: string;

@@ -9,6 +9,8 @@ import {
   Divider,
 } from "@mui/material";
 
+import { WeightFormatter } from "@components/index";
+
 type ResultCardProps = {
   title: string;
   data: Record<string, number>;
@@ -16,7 +18,7 @@ type ResultCardProps = {
 
 const ResultCard: FC<ResultCardProps> = ({ title, data }) => {
   return (
-    <Card style={{ margin: "10px 0" }}>
+    <Card className="resultCard" style={{ margin: "10px 0" }}>
       <CardContent>
         <Typography variant="h5" component="div">
           {title}
@@ -26,7 +28,7 @@ const ResultCard: FC<ResultCardProps> = ({ title, data }) => {
           {Object.entries(data).map(([key, value]) => (
             <ListItem key={key}>
               <Typography variant="body1">
-                {key}: {value.toFixed(2)} grams
+                {`${key}: `} <WeightFormatter value={value} />
               </Typography>
             </ListItem>
           ))}

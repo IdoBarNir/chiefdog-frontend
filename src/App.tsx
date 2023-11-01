@@ -1,15 +1,21 @@
 import { FC } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Global } from "@emotion/react";
 
-import MainRoutes from "./routes/MainRoutes";
-import globalStyles from "./styles/globalStyles";
+import { CssBaseline } from "@mui/material";
+
+import { MainRoutes } from "@routes/index";
+import { ThemeProvider } from "@theme/index";
+import { Layout } from "@layouts/index";
 
 const App: FC = () => {
   return (
     <BrowserRouter>
-      <Global styles={globalStyles} />
-      <MainRoutes />
+      <ThemeProvider>
+        <CssBaseline />
+        <Layout>
+          <MainRoutes />
+        </Layout>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };
